@@ -35,6 +35,9 @@ let
     # rust language
     cargo
     rustc
+    rustfmt
+    clippy
+    rust-analyzer
 
     # language servers
     lua-language-server
