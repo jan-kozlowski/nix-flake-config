@@ -7,17 +7,17 @@
     hyprfm.url = "github:soyeb-jim285/hyprfm";
   };
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   outputs =
     {
       nixpkgs,
       ...
     }@inputs:
     {
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
