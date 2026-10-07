@@ -45,6 +45,11 @@
     ];
   };
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # Do not change this.
   system.stateVersion = "26.05";
 }
