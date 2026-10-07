@@ -14,7 +14,7 @@
     }@inputs:
     let
       host =
-        hostName: extraModules:
+        hostName:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs hostName; };
           modules = [
