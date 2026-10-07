@@ -25,7 +25,6 @@ let
     zoxide
     bat
     eza
-    starship
     obsidian
   ];
 
@@ -41,11 +40,17 @@ let
 
     # language servers
     lua-language-server
-    nil
     nixd
   ];
 in
 {
   nixpkgs.config.allowUnfree = true;
+
+  programs = {
+    nix-ld.enable = true;
+    starship.enable = true;
+    starship.transientPrompt.enable = true;
+  };
+
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
 }
