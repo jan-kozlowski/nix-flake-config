@@ -31,6 +31,7 @@ let
   developmentPackages = with pkgs; [
     git
     gnumake
+    gcc
     # rust language
     cargo
     rustc
