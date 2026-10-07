@@ -1,10 +1,10 @@
-{ ... }:
+{ hostName, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "nixos";
+    hostName = hostName;
     networkmanager.enable = true;
   };
 
@@ -49,7 +49,4 @@
     "nix-command"
     "flakes"
   ];
-
-  # Do not change this.
-  system.stateVersion = "26.05";
 }

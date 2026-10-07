@@ -12,17 +12,24 @@
       nixpkgs,
       ...
     }@inputs:
+    let
+      host =
+        hostName: extraModules:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs hostName; };
+          modules = [
+            ./hosts/${hostName}
+            ./modules/configuration.nix
+            ./modules/desktop.nix
+            ./modules/packages.nix
+            ./modules/gaming.nix
+          ];
+        };
+    in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./configuration.nix
-          ./hardware-configuration.nix
-          ./desktop.nix
-          ./packages.nix
-          ./gaming.nix
-        ];
+      nixosConfigurations = {
+        pc = host "pc";
+        laptop = host "laptop";
       };
     };
 }
