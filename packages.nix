@@ -5,29 +5,34 @@
 }:
 let
   essentialPackages = with pkgs; [
-    kitty
-    git
-    gnumake
-    chezmoi
-    zoxide
-    bat
-    exa
-    starship
+    # text editor
     zed-editor
-    obsidian
-    noctalia
-
+    # terminal emulator
+    kitty
+    # file manager
     inputs.hyprfm.packages."${pkgs.stdenv.hostPlatform.system}".default
+    # browser
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    # desktop shell
+    noctalia
   ];
 
   nonEssentialPackages = with pkgs; [
     spotify
     chafa
     fastfetch
+    chezmoi
+    zoxide
+    bat
+    eza
+    starship
+    obsidian
   ];
 
   developmentPackages = with pkgs; [
+    git
+    gnumake
+    # rust language
     cargo
     rustc
 
@@ -38,5 +43,6 @@ let
   ];
 in
 {
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
 }
