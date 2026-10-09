@@ -14,7 +14,7 @@
     }@inputs:
     let
       host =
-        hostName:
+        hostName: extraModules:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs hostName; };
           modules = [
@@ -23,13 +23,14 @@
             ./modules/desktop.nix
             ./modules/packages.nix
             ./modules/gaming.nix
-          ];
+          ]
+          ++ extraModules;
         };
     in
     {
       nixosConfigurations = {
-        pc = host "pc";
-        laptop = host "laptop";
+        pc = host "pc" [ ./modules/nvidia.nix ];
+        laptop = host "laptop" [ ];
       };
     };
 }

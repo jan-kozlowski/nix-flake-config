@@ -32,18 +32,32 @@ let
 
   developmentPackages = with pkgs; [
     git
+    lazygit
     gnumake
     gcc
+    clang
+
+    # c libraries
+    libGL
+    libGLU
+    libtiff
+    freeglut
+    glm
+    glfw
+    glew
+    mesa-demos
+
     # rust language
     cargo
     rustc
     rustfmt
     clippy
-    rust-analyzer
 
     # language servers
     lua-language-server
     nixd
+    rust-analyzer
+    clang-tools
   ];
 in
 {
@@ -52,7 +66,6 @@ in
   programs = {
     nix-ld.enable = true;
     starship.enable = true;
-    starship.transientPrompt.enable = true;
   };
 
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
