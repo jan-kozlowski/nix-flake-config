@@ -26,6 +26,8 @@ let
     bat
     eza
     obsidian
+    ffmpeg
+    exiftool
   ];
 
   developmentPackages = with pkgs; [
