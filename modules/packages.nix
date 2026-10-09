@@ -68,5 +68,19 @@ in
     starship.enable = true;
   };
 
+  environment.extraOutputsToInstall = [ "dev" ];
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
+  environment.pathsToLink = [
+      "/include"
+      "/lib/pkgconfig"
+      "/share/pkgconfig"
+      "/lib/cmake"
+    ];
+    environment.sessionVariables = {
+      C_INCLUDE_PATH = "/run/current-system/sw/include";
+      CPLUS_INCLUDE_PATH = "/run/current-system/sw/include";
+      LIBRARY_PATH = "/run/current-system/sw/lib";
+      PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig";
+      CMAKE_PREFIX_PATH = "/run/current-system/sw";
+    };
 }
