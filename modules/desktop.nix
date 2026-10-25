@@ -6,9 +6,9 @@
     xwayland.enable = true;
   };
 
-  services.displayManager.sddm = {
+  programs.regreet.enable = true;
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
   };
 
   # required for hyprfm

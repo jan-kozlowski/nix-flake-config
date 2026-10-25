@@ -15,6 +15,7 @@ let
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
     # desktop shell
     noctalia
+    bibata-cursors
   ];
 
   nonEssentialPackages = with pkgs; [
@@ -41,11 +42,21 @@ let
     libGL
     libGLU
     libtiff
+    libx11
     freeglut
     glm
     glfw
     glew
     mesa-demos
+    pkg-config
+    libx11
+    libxcursor
+    libxrandr
+    libxi
+    libxinerama
+    xorgproto
+    wayland
+    libxkbcommon
 
     # rust language
     cargo
@@ -56,6 +67,7 @@ let
     # language servers
     lua-language-server
     nixd
+    nil
     rust-analyzer
     clang-tools
   ];
@@ -83,4 +95,16 @@ in
       PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig";
       CMAKE_PREFIX_PATH = "/run/current-system/sw";
     };
+
+    environment.sessionVariables.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+      libGL
+      glfw
+      libx11
+      libxcursor
+      libxrandr
+      libxi
+      libxinerama
+      wayland
+      libxkbcommon
+    ]);
 }
