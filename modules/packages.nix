@@ -4,6 +4,11 @@
   ...
 }:
 let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+
   essentialPackages = with pkgs; [
     # text editor
     zed-editor
@@ -39,7 +44,7 @@ let
     gcc
     clang
 
-    mdbook
+    unstable-pkgs.mdbook
 
     # c libraries
     libGL
@@ -86,20 +91,22 @@ in
   environment.extraOutputsToInstall = [ "dev" ];
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
   environment.pathsToLink = [
-      "/include"
-      "/lib/pkgconfig"
-      "/share/pkgconfig"
-      "/lib/cmake"
-    ];
-    environment.sessionVariables = {
-      C_INCLUDE_PATH = "/run/current-system/sw/include";
-      CPLUS_INCLUDE_PATH = "/run/current-system/sw/include";
-      LIBRARY_PATH = "/run/current-system/sw/lib";
-      PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig";
-      CMAKE_PREFIX_PATH = "/run/current-system/sw";
-    };
+    "/include"
+    "/lib/pkgconfig"
+    "/share/pkgconfig"
+    "/lib/cmake"
+  ];
+  environment.sessionVariables = {
+    C_INCLUDE_PATH = "/run/current-system/sw/include";
+    CPLUS_INCLUDE_PATH = "/run/current-system/sw/include";
+    LIBRARY_PATH = "/run/current-system/sw/lib";
+    PKG_CONFIG_PATH = "/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig";
+    CMAKE_PREFIX_PATH = "/run/current-system/sw";
+  };
 
-    environment.sessionVariables.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+  environment.sessionVariables.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
+    with pkgs;
+    [
       libGL
       glfw
       libx11
@@ -109,5 +116,6 @@ in
       libxinerama
       wayland
       libxkbcommon
-    ]);
+    ]
+  );
 }
