@@ -33,10 +33,13 @@ let
 
   developmentPackages = with pkgs; [
     git
+    gh
     lazygit
     gnumake
     gcc
     clang
+
+    mdbook
 
     # c libraries
     libGL
