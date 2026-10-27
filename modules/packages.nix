@@ -45,6 +45,7 @@ let
     clang
 
     unstable-pkgs.mdbook
+    unstable-pkgs.mdbook-mermaid
 
     # c libraries
     libGL
