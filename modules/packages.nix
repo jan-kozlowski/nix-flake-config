@@ -24,6 +24,8 @@ let
   ];
 
   nonEssentialPackages = with pkgs; [
+    appimage-run
+    libreoffice
     spotify
     chafa
     fastfetch
