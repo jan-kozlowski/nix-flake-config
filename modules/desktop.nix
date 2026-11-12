@@ -2,8 +2,12 @@
 {
   programs.hyprland = {
     enable = true;
-    withUWSM = true;
     xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    SDL_VIDEODRIVER = "x11";
+    SDL_VIDEO_DRIVER = "x11";
   };
 
   programs.regreet.enable = true;
