@@ -25,6 +25,7 @@ let
   ];
 
   nonEssentialPackages = with pkgs; [
+    octaveFull
     appimage-run
     libreoffice
     spotify
