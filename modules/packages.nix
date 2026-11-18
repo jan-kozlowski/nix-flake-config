@@ -66,6 +66,10 @@ in
   programs = {
     nix-ld.enable = true;
     starship.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   environment.systemPackages = essentialPackages ++ nonEssentialPackages ++ developmentPackages;
